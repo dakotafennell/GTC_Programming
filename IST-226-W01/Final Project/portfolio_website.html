@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Portfolio Website-Brad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- linking css file -->
+  <link href="styles.css" rel="stylesheet">
+  <!-- bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+  <!-- load javascript after loading all html content -->
+  <script src="script/script.js" defer></script>
+  <script src="submit_form_button.js" defer></script>
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbarScroll">
+        <div class="container">
+            <a class="navbar-brand" href="#">Louis</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+    <!-- main banner -->
+    <section class="bgimage" id="home">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hero-text">
+                <h2 class="hero_title">Hi, I'm Louis</h2>
+                <p class="hero_desc">I am an engineering designer living in Greenville, SC</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- about section-->
+    <section id="about">
+        <div class="container mt-4 pt-4">
+            <h1 class="text-center">About Me</h1>
+            <div class="row mt-4">
+                <div class="col-lg-4">
+                    <img src="Christmas_2022-26.jpg" class= "imageAboutPage" alt="">
+                </div>
+
+                <div class="col-lg-8">
+                    <p> My name is Louis Tillman Fennell III. I have been working in the engineering
+                        and design field for almost 10 years working mostly in the mechanical departments.
+                        I have worked on a variety of different projects over the years whether they be
+                        life sciences, mining and metals, or in the nuclear industry. I've spent about
+                        5 of the past 9 years in the nuclear industry. 
+                    </p>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Name: Louis Fennell III</li>
+                                <li>Age: 29</li>
+                                <li>Occupation: Engineering Designer</li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Name: Louis Fennell III</li>
+                                <li>Age: 29</li>
+                                <li>Occupation: Engineering Designer</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <p> Starting in January of 2022 I returned to school at Greenville Technical College to 
+                            begin working on an associates degree in Computer Technology specializing in Programming.
+                            I am currently at the end of my third semester and am working on Python, HTML5, CSS, and 
+                            JavaScript. I expect to be finished with my degree in 2024.                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- services section-->
+    <section id="services">
+        <div class="container">
+            <h1 class="text-center">Services</h1>
+            <div class="row">
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="fas servicesIcon fa-clock"></i>
+                            <h4 class="card-title mt-3">Website Development</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="fas servicesIcon fa-layer-group"></i>
+                            <h4 class="card-title mt-3">Website Design</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="far servicesIcon fa-check-circle"></i>
+                            <h4 class="card-title mt-3">Website Deployment</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="fas servicesIcon fa-search"></i>
+                            <h4 class="card-title mt-3">SEO</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="fas servicesIcon fa-shield-alt"></i>
+                            <h4 class="card-title mt-3">DevOps</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card servicesText">
+                        <div class="card-body">
+                            <i class="fas servicesIcon fa-wrench"></i>
+                            <h4 class="card-title mt-3">QA</h4>
+                            <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                                Some quick example text to build on the card title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- portfolio section-->
+    <section id="portfolio">
+        <div class="container mt-3">
+            <h1 class="text-center">Portfolio</h1>
+            <div class="row">
+                <div class="col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top" src="Christmas_2022-26.jpg" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">HTML5 Hello Statement</h4>
+                            <p class="card-text">My first graded practice that showed me how to upload and host items.</p>
+                            <div class="text-center">
+                                <a href="github.com/dakotafennell" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card portfolioContent">
+                        <img class="card-img-top" src="images/portfolioImage4.jpg" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Curbside Thai</h4>
+                            <p class="card-text">Graded practice 0 designed to teach how to get started with HTML5.</p>
+                            <div class="text-center">
+                                <a href="http://ist226ltfennell.atwebpages.com/chapter1/curbsidethai/ct_start.html" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card portfolioContent">
+                        <img class="card-img-top" src="images/portfolioImage3.jpg" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Tri and Succeed Sports</h4>
+                            <p class="card-text">Graded practice 1 designed to teach the beginning basics of CSS styling.</p>
+                            <div class="text-center">
+                                <a href="http://ist226ltfennell.atwebpages.com/chapter2/triandsucceedsports/tss_home.html" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-4 mt-4">
+                    <div class="card portfolioContent">
+                        <img class="card-img-top" src="pc_photo2.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pandaisia Chocolate</h4>
+                            <p class="card-text">Graded practice 2 designed to teach how to design a page layout.</p>
+                            <div class="text-center">
+                                <a href="http://ist226ltfennell.atwebpages.com/chapter3/pandaisiachocolate/pc_home.html" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card portfolioContent">
+                        <img class="card-img-top" src="treeandbook.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Tree and Book</h4>
+                            <p class="card-text">Graded practice 3 designed to teach the basics of graphic design within CSS.</p>
+                            <div class="text-center">
+                                <a href="http://ist226ltfennell.atwebpages.com/chapter4/treeandbook/tb_komatsu.html" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <div class="card portfolioContent">
+                        <img class="card-img-top" src="tfdaycare.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Trusted Friends Daycare</h4>
+                            <p class="card-text">Graded practice 4 designed to teach the basics of designing for the mobile web.</p>
+                            <div class="text-center">
+                                <a href="" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4 mt-4">
+                <div class="card">
+                    <img class="card-img-top" src="" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">Graded practice 5 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="http://ist226ltfennell.atwebpages.com/chapter5/trustedfriends/tf_home.html" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4">
+                <div class="card portfolioContent">
+                    <img class="card-img-top" src="http://ist226ltfennell.atwebpages.com/chapter6/dlr_evenings.html" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">GGraded practice 6 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4">
+                <div class="card portfolioContent">
+                    <img class="card-img-top" src="http://ist226ltfennell.atwebpages.com/chapter7/rb_survey.html" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">Graded practice 7 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4 mt-4">
+                <div class="card portfolioContent">
+                    <img class="card-img-top" src="http://ist226ltfennell.atwebpages.com/chapter8/cp_royal.html" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">Graded practice 8 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4">
+                <div class="card portfolioContent">
+                    <img class="card-img-top" src="http://ist226ltfennell.atwebpages.com/chapter9/tny_clock.html" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">Graded practice 9 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4">
+                <div class="card portfolioContent">
+                    <img class="card-img-top" src="http://ist226ltfennell.atwebpages.com/chapter10/lht_august.html" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">REPLACE TEXT</h4>
+                        <p class="card-text">Graded practice 10 designed to teach .</p>
+                        <div class="text-center">
+                            <a href="" class="btn btn-success">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- contact section-->
+    <section id="contact">
+        <div class="container mt-3 contactContent">
+            <h1 class="text-center">Contact Me</h1>
+
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <!-- to edit google map goto https://www.embed-map.com type your location, generate html code and copy the html  -->
+                    <div style="max-width:100%;overflow:hidden;color:red;width:500px;height:500px;">
+                        <div id="embedmap-canvas" style="height:100%; width:100%;max-width:100%;">
+                            <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Greenville,+SC,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+                            </iframe>
+                        </div>
+                        <a class="googlemaps-html" href="https://www.embed-map.com" id="get-data-forembedmap">https://www.embed-map.com</a>
+                        <style>#embedmap-canvas img{max-width:none!important;background:none!important;font-size: inherit;font-weight:inherit;}
+                        </style>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- form fields -->
+                    <form>
+                        <input type="text" class="form-control form-control-lg" placeholder="Name" required>
+                        <input type="email" class="form-control mt-3" placeholder="Email" required>
+                        <input type="text" class="form-control mt-3" placeholder="Subject" required>
+                        <div class="mb-3 mt-3">
+                            <textarea class="form-control" rows="5" id="comment" name="text" placeholder="Project Details" required></textarea>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-success mt-3">Submit</button>
+                    <button type="clear" class="btn btn-clear">Clear</button>
+                    
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- footer section 2 -->
+    <!-- footer section-->
+    <footer id="footer">
+        <div class="container-fluid">
+            <!-- social media icons -->
+            <div class="social-media-icons">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.twitch.tv/" target="_blank"><i class="fab fa-twitch"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
