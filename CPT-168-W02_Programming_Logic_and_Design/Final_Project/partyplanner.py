@@ -2,11 +2,14 @@
 
 # Louis Fennell III, November 14, 2022, CPT-168-W02, Final Projects
 
-# This program, party_planner.py, is intended to be a an interface for 
-# interacting with a database of party attendees stored in an external CSV 
-# file.
+# This program, party_planner.py, is as party planning program that is an 
+# interface for interacting with a database of party attendees, their meal 
+# choice, their paid fee, their guests, and their guests meal choice, which is
+# stored in an external CSV file. This program will iterate on each row in the
+# csv file through the program which allows it to be searched through, read 
+# from, and written to.
 
-
+import sys
 import csv
 import locale as lc
 from decimal import Decimal, ROUND_HALF_UP
@@ -33,33 +36,43 @@ def read_attendees():
             attendees.append(row)
     return attendees
 
-#  displays the results in the correct currency format for the US for 
-#  Windows
-#lc.setlocale(lc.LC_ALL, "us")      # for Windows
-#  display the results in the correct currency format for the US for macOS
-lc.setlocale(lc.LC_ALL, "en_US")    # for Mac OS X
+# Defines the function, set_platform(). This function should set the correct
+# locale based on what system being used.
+def set_platform():
+    if sys.platform == "win32":
+        # displays the results in the correct currency format for the US for 
+        # Windows.
+        lc.setlocale(lc.LC_ALL, "us")      # for Windows
+    elif sys.platform == "darwin":
+        # display the results in the correct currency format for the US for 
+        # macOS.
+        lc.setlocale(lc.LC_ALL, "en_US")    # for Mac OS X
 
 # Defines the function, display_meal_choices(). This function displays the 
 # menu choices menu, that the user can select their choice from. 
 # Example output:
 #
-# Meal choices are as follows:
+#     Meal choices are as follows:
 #
-# 1.   Chicken Picatta
-# 2.   Beef Wellington
-# 3.   Steak
-# 4.   Veggie Lasagna
-# 5.   Blackened Mahi-Mahi
-# 6.   Fettuccine Alfredo
+#     1.   Chicken Picatta
+#     2.   Beef Wellington
+#     3.   Vegetarian Lasagna
+#     4.   Filet Mignon
+#     5.   Blackened Mahi-Mahi
+#     6.   Fettuccine Alfredo
+#     7.   Fish and Chips
+#
+#     Command: 
 #
 def display_meal_choices():
     print("\nMeal choices are as follows:")
     print("\n1.   Chicken Picatta")
     print("2.   Beef Wellington")
-    print("3.   Filet Mignon")
-    print("4.   Vegetarian Lasagna")
+    print("3.   Vegetarian Lasagna")
+    print("4.   Filet Mignon")
     print("5.   Blackened Mahi-Mahi")
-    print("6.   Fettuccine Alfredo\n")
+    print("6.   Fettuccine Alfredo")
+    print("7.   Fish and Chips")
 
 # Defines the function, attendee_meal_choice_commands(). This function 
 # contains all of the code to choose which meal choice the attendee wants.
@@ -71,7 +84,7 @@ def attendee_meal_choice_commands():
     
     while True:
         
-        meal_choice = input("Choose an entree option: ")
+        meal_choice = input("\nChoose an entree option: ")
         if meal_choice == "1":
             meal_choice = "Chicken Picatta"
         elif meal_choice == "2":
@@ -79,11 +92,13 @@ def attendee_meal_choice_commands():
         elif meal_choice == "3":
             meal_choice  = "Vegetarian Lasagna"
         elif meal_choice == "4":
-            meal_choice  = "Steak"
+            meal_choice  = "Filet Mignon"
         elif meal_choice == "5":
             meal_choice  = "Blackened Mahi-Mahi"
         elif meal_choice == "6":
             meal_choice  = "Fettuccine Alfredo"
+        elif meal_choice == "7":
+            meal_choice = "Fish and Chips"
         else:
             print("Invalid choice. Please try again.")
         return meal_choice
@@ -104,12 +119,14 @@ def search_attendees(attendees):
         for row in attendees:
             if search_term in row[0]:
                 print(f"\nName: {row[2]} | Meal Choice: {row[3]}")
-            elif search_term in row[1]:
+            if search_term in row[1]:
                 print(f"\nName: {row[2]} | Meal Choice: {row[3]}")
-            elif search_term in row[5]:
+            if len(row) > 5 and search_term in row[5] and row[5] != "":
                 print(f"\nName: {row[7]} | Meal Choice: {row[8]}")
-            elif search_term in row[6]:
+            if search_term in row[6]:
                 print(f"\nName: {row[7]} | Meal Choice: {row[8]}")
+#        if search_term not in row[0] not in row[1] not in row[5] not in row[6]:
+#                print("\nNo such attendee.")
             #elif search_term in row[5]:
                 #print(print(f"\nName: {row[7]} | Meal Choice: {row[8]}"))
             #if current rows 2nd value is equal to input, print that row
@@ -135,8 +152,9 @@ def add_guest(attendees):
     
     while choice == "y":
         
-        guest = input("\nIs the member bringing a guest? (y/n): ").lower()
-        if guest == "y":
+        bringing_guest = input("\nIs the member bringing a guest? (y/n): ").lower()
+        if bringing_guest == "y":
+
             first_name = input("\nEnter Member's First Name: ").title()
             last_name = input("\nEnter Member's Last Name: ").title()
             full_name = (f"{first_name} {last_name}")
@@ -153,8 +171,8 @@ def add_guest(attendees):
                                                     ROUND_HALF_UP)
             guests_fee_paid = lc.currency(guests_fee_paid, grouping=True)
 
-            attendee = [first_name, last_name, full_name, 
-                                meal_choice, fee_paid, guests_first_name,
+            attendee = [first_name, last_name, full_name, meal_choice,
+                                fee_paid, guests_first_name,
                                 guests_last_name, guests_full_name,
                                 guests_meal_choice, guests_fee_paid]
             
@@ -170,7 +188,7 @@ def add_guest(attendees):
             
             choice = input("\nAdd another Member and/or Guest? (y/n): ")
                 
-        elif guest == "n":
+        elif bringing_guest == "n":
             first_name = input("\nEnter Member's First Name: ").title()
             last_name = input("\nEnter Member's Last Name: ").title()
             full_name = (f"{first_name} {last_name}")
@@ -192,80 +210,219 @@ def add_guest(attendees):
             
             choice = input("\nAdd another Member and/or Guest? (y/n): ")
 
-# Defines the function, delete_guest(), with the argument, attendees. 
-def delete_guest(attendees):
+def delete_attendee(attendees):
     attendees = read_attendees()
     
-    delete_attendee = input("Title: ")
-    for i in range(0, len(attendees)):
-        if delete_attendee in attendees:
+    option = "y"
+    
+    adjusted_attendees_list = []
+    
+    while option == "y":
+        delete_attendee = input("Member to delete: ").title()
+        if option == "y":
             for row in attendees:
-                del attendees[row]
-        print(f"{delete_attendee} removed from catalog.")
-    else:
-        print(f"{delete_attendee} doesn't exist in the catalog.")
+                if row[0] == delete_attendee:
+                    attendees.remove(row)
+                    adjusted_attendees_list.append(row)
+                elif len(row) == 10 and row[5] == delete_attendee:
+                    attendees.remove(row)
+                    adjusted_attendees_list.append(row)
+                elif row[0] == delete_attendee:
+                    print("Attendee does not exist")
+                elif len(row) == 10 and row[5] != delete_attendee:
+                    print("Attendee does not exist")
+        if option == "n":
+            break
+        option = input("Would you like to remove another member? (y/n)").lower()
+        
+    adjusted_attendees_list.append(attendees)
+    write_attendees(attendees)
 
+''' if len(row) == 10 and row[5] != "":
+    print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}|".format(*row),
+            f"{row[3]:<20}| {row[4]:<10}".format(*row))
+    print(f"{row[5]:10}| {row[6]:<12}| {row[7]:<18}|".format(*row),
+            f"{row[8]:<20}| {row[9]:<10}".format(*row))
+if len(row) == 5:
+    print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}|".format(*row),
+            f"{row[3]:<20}| {row[4]:<10}".format(*row))'''
+        
 # Defines the function, print_table_list(), with the argument, attendees. This
 # function prints an output of all guests and their meal choices formatted in a
 # table with members who aren't bringing guests printing below that. Example:
+#
 # First     | Last        | Full Name         | Meal                | Fee
 # --------------------------------------------------------------------------
-# Katie     | Stayton     | Katie Stayton     | Beef Wellington     | $22.00    
-# Brian     | Lord        | Brian Lord        | Steak               | $22.00    
-# Louis     | Fennell     | Louis Fennell     | Fettuccine Alfredo  | $22.00    
-# Danielle  | Fennell     | Danielle Fennell  | Blackened Mahi-Mahi | $22.00    
-# Bob       | Marley      | Bob Marley        | Veggie Lasagna      | $22.00    
-# Louis     | Fennell     | Louis Fennell     | Steak               | $22.00    
-# Susan     | Fennell     | Susan Fennell     | Chicken             | $22.00    
-# Tillman   | Fennell     | Tillman Fennell   | Fettuccine Alfredo  | $22.00    
-# Blair     | Ingram      | Blair Ingram      | Steak               | $22.00    
-# Dakota    | Fennell     | Dakota Fennell    | Steak               | $22.00    
-# Danielle  | Stayton     | Danielle Stayton  | Blackened Mahi-Mahi | $22.00    
-# Robert    | Villanueva  | Robert Villanueva | Blackened Mahi-Mahi | $22.00    
-# Lauren    | Collier     | Lauren Collier    | Chicken             | $22.00
+# Katie     | Stayton     | Katie Stayton     | Beef Wellington     | $22.00
+# Brian     | Lord        | Brian Lord        | Filet Mignon        | $22.00
+# Louis     | Fennell     | Louis Fennell     | Fettuccine Alfredo  | $22.00
+# Danielle  | Fennell     | Danielle Fennell  | Blackened Mahi-Mahi | $22.00
+# Bob       | Marley      | Bob Marley        | Vegetarian Lasagna  | $22.00
+# Louis     | Fennell     | Louis Fennell     | Filet Mignon        | $22.00
+# Susan     | Fennell     | Susan Fennell     | Chicken Picatta     | $22.00
 #
-def print_table_list(attendees):
+def display_all_attendees(attendees):
+    
     print()
     print("First\t  | Last\t| Full Name\t    | Meal\t\t  | Fee")
     print("-" * 74)
+    
     for row in attendees:
         if len(row) == 10 and row[5] != "":
-            print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}| {row[3]:<20}| {row[4]:<10}".format(*row))
-            print(f"{row[5]:10}| {row[6]:<12}| {row[7]:<18}| {row[8]:<20}| {row[9]:<10}".format(*row))
+            print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}|".format(*row),
+                  f"{row[3]:<20}| {row[4]:<10}".format(*row))
+            print(f"{row[5]:10}| {row[6]:<12}| {row[7]:<18}|".format(*row),
+                  f"{row[8]:<20}| {row[9]:<10}".format(*row))
+        if len(row) == 5:
+            print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}|".format(*row),
+                  f"{row[3]:<20}| {row[4]:<10}".format(*row))
+        elif len(row) == 0 and row[5] == "":
+            continue
         elif row[5] == "":
-            print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}| {row[3]:<20}| {row[4]:<10}".format(*row))
-
-def meal_order_totals(attendees):
-    attendees = read_attendees()
-    
-    for row in attendees:    
-        meal_choice = ""
+            print(f"{row[0]:10}| {row[1]:<12}| {row[2]:<18}|".format(*row),
+                  f"{row[3]:<20}| {row[4]:<10}".format(*row))
+    print("-" * 74)
 
 def total_fees_paid(attendees):
     attendees = read_attendees()
-    total = 0
+    
+    number_of_fees = 0
     
     for row in attendees:
-        row[5].strip("$")
-        Decimal(row[5])
-        total += row[5]
-        total = total.quantize(Decimal("1.00"), ROUND_HALF_UP)
-        total = lc.currency(total, grouping=True)
-    print(total)
+        if len(row) == 11 and row[6] != "":
+            number_of_fees += 2
+        if len(row) == 5:
+            number_of_fees += 1
+        elif len(row) == 0 and row[6] == "":
+            continue
+        elif row[5] == "":
+            number_of_fees += 1
+    
+    number_of_fees = Decimal(number_of_fees)
+    total_fees = number_of_fees * 22
+    
+    total_fees = total_fees.quantize(Decimal("1.00"), ROUND_HALF_UP)
+    total_fees = lc.currency(total_fees, grouping=True)
 
-def crunch_numbers(attendees):
+    print(f"Total fees collected: {total_fees}")
+
+# Defines the function, view_all_attendees(), with the argument, attendees. 
+# This function will bring a three option menu allowing the user to choose
+# to view a list of either all members or all guests.
+def view_all_attendees(attendees):
+    choice = "y"
+    
     attendees = read_attendees()
-    total = 0
-    for number in attendees:
-        total += number
+    
+    while choice == "y":
+        print()
+        print("1.   Members")
+        print("2.   Guests")
+        option = input("\nPlease choose an option: ").lower()
+        if option == "1":
+            view_all_members(attendees)
+        elif option == "2":
+            view_all_guests(attendees)
+        elif option == "0":
+            break
+        else:
+            print("Invalid command. Please try again.")
+        choice = input("\nWould you like to view another list? y/n: ")
 
+# Defines the function, view_all_attendees(), with the argument, attendees. 
+# This function adds up the total amount of both members and guests and outputs
 def total_attendees(attendees):
     attendees = read_attendees()
-    total_attendees = 0
-    for i in range(len(attendees[1])):
-        total_attendees += i
-        print(total_attendees)
-    print()
+    
+    number_of_attendees = 0
+    
+    for row in attendees:
+        if len(row) == 10 and row[5] != "":
+            number_of_attendees += 2
+        if len(row) == 5:
+            number_of_attendees += 1
+        elif len(row) == 0 and row[5] == "":
+            continue
+        elif row[5] == "":
+            number_of_attendees += 1
+
+    print(f"\nThe Total Number of Attendees is: {number_of_attendees}")
+
+# Defines the function, calculate_meal_totals(), with the argument, attendees. 
+# This function adds up the total amount of every meal choice for both members
+# and guests and prints each meal choice name followed by total number of that
+# choice.
+def calculate_meal_totals(attendees):
+    attendees = read_attendees()
+    
+    chicken_picatta_total = 0
+    beef_wellington_total = 0
+    filet_mignon_total = 0
+    fettuccine_alfredo_total = 0
+    vegetarian_lasagna_total = 0
+    blackened_mahi_mahi_total = 0
+    fish_and_chips_total = 0
+    total_number_of_meals = 0
+    
+    for row in attendees:
+        if len(row) == 10:
+            if row[3] == "Chicken Picatta":
+                chicken_picatta_total += 1
+            if row[3] == "Beef Wellington":
+                beef_wellington_total += 1
+            if row[3] == "Filet Mignon":
+                filet_mignon_total += 1
+            if row[3] == "Fettuccine Alfredo":
+                fettuccine_alfredo_total += 1
+            if row[3] == "Vegetarian Lasagna":
+                vegetarian_lasagna_total += 1
+            if row[3] == "Blackened Mahi-Mahi":
+                blackened_mahi_mahi_total += 1
+            if row[3] == "Fish and Chips":
+                fish_and_chips_total += 1
+            if len(row) > 5 and row[8] != "":
+                if row[8] == "Chicken Picatta":
+                    chicken_picatta_total += 1
+                if row[8] == "Beef Wellington":
+                    beef_wellington_total += 1
+                if row[8] == "Fettuccine Alfredo":
+                    filet_mignon_total += 1
+                if row[8] == "Fettuccine Alfredo":
+                    fettuccine_alfredo_total += 1
+                if row[8] == "Vegetarian Lasagna":
+                    vegetarian_lasagna_total += 1
+                if row[8] == "Blackened Mahi-Mahi":
+                    blackened_mahi_mahi_total += 1
+                if row[8] == "Fish and Chips":
+                    fish_and_chips_total += 1
+        if len(row) == 5:
+            if row[3] == "Chicken Picatta":
+                chicken_picatta_total += 1
+            if row[3] == "Beef Wellington":
+                beef_wellington_total += 1
+            if row[3] == "Fettuccine Alfredo":
+                filet_mignon_total += 1
+            if row[3] == "Fettuccine Alfredo":
+                fettuccine_alfredo_total += 1
+            if row[3] == "Vegetarian Lasagna":
+                vegetarian_lasagna_total += 1
+            if row[3] == "Blackened Mahi-Mahi":
+                blackened_mahi_mahi_total += 1
+            if row[3] == "Fish and Chips":
+                fish_and_chips_total += 1
+
+    total_number_of_meals += (fish_and_chips_total + blackened_mahi_mahi_total 
+    + vegetarian_lasagna_total + fettuccine_alfredo_total + filet_mignon_total 
+    + beef_wellington_total + chicken_picatta_total)
+
+    print("\nTotal Number of Each Meal Choice")
+    print(f"\nChicken Picatta: {chicken_picatta_total}")
+    print(f"Beef Wellington: {beef_wellington_total}")
+    print(f"Filet Mignon: {filet_mignon_total}")
+    print(f"Fettuccine Alfredo: {fettuccine_alfredo_total}")
+    print(f"Vegetarian Lasagna: {blackened_mahi_mahi_total}")
+    print(f"Blackened Mahi-Mahi: {blackened_mahi_mahi_total}")
+    print(f"Total meals to cook: {total_number_of_meals}")
 
 '''
 The below function was used to test and work out what methods and functions 
@@ -337,28 +494,47 @@ def test_function():
 # Defines the function, view_all_attendees, with the argument, attendees. This
 # function, when called, will print a list of all the current attendees using
 # a for loop.
-def view_all_attendees(attendees):
+def view_all_members(attendees):
     attendees = read_attendees()
-    print("\n#   Full Name")
+    print("\n#  | Full Name")
     print("-" * 25)
     for i, row in enumerate(attendees, start=1):
-        print(f"{i}.  {row[2]}")
-    print()
+        print(f"{i:<3}| {row[2]:20}".format(*row))
+    print("-" * 25)
+
+def party_stats(attendees):
+    
+    total_number_of_attendees = total_attendees()
+    total_number_of_meals = calculate_meal_totals()
+    
+    print(f"Total number of attendees: {total_number_of_attendees}")
+    print(f"Total number of meals: {total_number_of_meals}")
+    print(f"Total fee amount paid: {total_number_of_meals}")
 
 # Defines the function, view_all_attendees, with the argument, attendees. This
 # function, when called, will print a list of all the current guest attendees 
 # using a for loop.
 def view_all_guests(attendees):
+    
     attendees = read_attendees()
-    print("\n#   Full Name")
+    
+    guests_list = []
+    
+    print("\n#  | Full Name")
     print("-" * 25)
-    for i, row in enumerate(attendees, start=1):
-        if row[7] != "":
-            #print(row[7])
-            print(f"{i}.  {row[7]}")
-        elif row[7] == "":
+
+    for row in attendees:
+        if len(row) > 5 and row[5] != "":
+            guests_list = guests_list.append(attendees)
+        if len(row) < 6 or row[5] == "":
             continue
-    print()
+    print(guests_list)
+    '''for i, row in enumerate(attendees, start=1):
+        if len(row) > 5 or row[5] != "":
+            #print(row[7])
+            print(f"{i:<3}| {row[7]:20}".format(*row))'''
+
+    print("-" * 25)
 
 # Defines the function, search_options_commands(). This function is to display
 # the search menus options.
@@ -436,7 +612,11 @@ def main_menu_commands(attendees):
         command = input("Command: ")
         if command == "1":
             registration_menu_commands(attendees)
-        # elif command == "test":   # Used to quickly test new functions
+        elif command == "test":   # Used to quickly test new functions
+        #    total_fees_paid(attendees)
+            delete_attendee(attendees)
+        #    calculate_meal_totals(attendees)
+        #    total_attendee_report(attendees)
         #    test_print_list(attendees) # renamed
         #    test_find_guest()
         #    test_find_guest()
@@ -497,11 +677,11 @@ def registration_menu_commands(attendees):
 
         option = input("\nCommand: ").lower()
         if option == "1":
-            print_table_list(attendees)
+            display_all_attendees(attendees)
         elif option == "2":
             add_guest(attendees)
         elif option == "3":
-            delete_guest(attendees)
+            delete_attendee(attendees)
         elif option == "4":
             search_options_commands(attendees)
         elif option == "5":
@@ -510,7 +690,7 @@ def registration_menu_commands(attendees):
             command = False
             display_main_menu()
         else:
-            print("Unknown command. Please try again.")
+            print("Invalid command. Please try again.")
 
 # Defines the function, display_reports_menu. This function contains the code
 # to display the reports menu and its options. Below is an example:
@@ -538,16 +718,16 @@ def display_reports_menu():
     print("| The Party Planner Reports Menu |")
     print("-" * 34)
     print("0.   Return to Main Menu")
-    print("1.   Attendee List")
-    print("2.   Guest List")
-    print("3.   View All")
-    print("4.   Party Statistics")
-    print("5.   View All Meal Choices")
-    print("6.   List Total Paid Attendees")
+    print("1.   View All")
+    print("2.   View Members or Guests")
+    print("3.   Party Statistics")
+    print("4.   List Total Attendees")
+    print("5.   List Total Members")
+    print("6.   List Total Guests")
     print("7.   View Total Meal Amount")
     print("8.   View Total Fees Paid")
     print("9.   Registration Menu")
-    print("_" * 30)
+    print("-" * 34)
 
 # Defines the function, reports_menu_commands. This function contains the code
 # to choose what reports to run.
@@ -555,37 +735,38 @@ def reports_menu_commands(attendees):
     
     attendees = read_attendees()
     
-    command_one = True
-    while command_one == True:
+    command = True
+    while command == True:
         display_reports_menu()
-        print()
-        command = input("Command: ").lower()
-        if command == "1":
-            view_all_attendees(attendees)
-        elif command == "2":
-            view_all_guests(attendees)
-        elif command == "3":
-            print_table_list(attendees)
-        elif command == "4":
-            total_attendees(attendees)
-        elif command == "5":
-            display_meal_choices()
-        elif command == "6":
-            registration_menu_commands()
-        elif command == "7":
-            meal_order_totals(attendees)
-        elif command == "8":
-            total_fees_paid(attendees)
-        elif command == "0":
-            command_one = False
+        option = input("\nCommand: ").lower()
+        if option == "0":
+            command = False
             display_main_menu()
-        elif command.lower() == "exit":
-            break
+        elif option == "1":
+            display_all_attendees(attendees)
+        elif option == "2":
+            view_all_attendees(attendees)
+        elif option == "3":
+            party_stats(attendees)
+        elif option == "3":
+            print("FUNCTION UNAVAILABLE")
+        elif option == "4":
+            total_attendees(attendees)
+        elif option == "7":
+            calculate_meal_totals(attendees)
+        elif option == "8":
+            total_fees_paid(attendees)
+        elif option == "9":
+            registration_menu_commands(attendees)
         else:
             print("\nUnknown command. Please try again")
 
 # Defines the main function.
 def main():
+    
+    # Sets the correct locale for the operating system that the user is on.
+    set_platform()
+    
     # Calls the function, display_main_menu, which prints the initially 
     # available commands.
     display_main_menu()
@@ -596,7 +777,9 @@ def main():
     # Used to test above function, read_attendees(), was stored in attendees
     # properly
     # print(f"\n{attendees}")
-
+   
+    # Calls the function, write_attendees(attendees)
+    write_attendees(attendees)
     # calls the function, main_menu_commands(attendees).
     main_menu_commands(attendees)
 
